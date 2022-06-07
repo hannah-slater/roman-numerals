@@ -6,40 +6,42 @@ class RomanNumerals{
         int minus = 0;
         for (int i = 0; i < length; i++){
             int num = numeral(s.charAt(i));
+            //subtracts previous number if necessary
             if (minus != 0){
                 num -= minus;
                 minus = 0;
             }
+            //if not the last digit, finds if the number is to be subtracted
             if (i != length - 1){
                 if (num == 1){
                     int nextNum = numeral(s.charAt(i+1));
                     if (nextNum == 5 || nextNum == 10){
                         minus = 1;
+                        num = 0;
                     }
-                    num = 0;
                 }
                 if (num == 10){
                     int nextNum = numeral(s.charAt(i+1));
                     if (nextNum == 50 || nextNum == 100){
                         minus = 10;
+                        num = 0;
                     }
-                    num = 0;
                 }
                 if (num == 100){
                     int nextNum = numeral(s.charAt(i+1));
                     if (nextNum == 500 || nextNum == 1000){
                         minus = 100;
+                        num = 0;
                     }
-                    num = 0;
                 }
             }
+            //adds together results to get full number
             number += num;
         }
-        //for first letter, if I X or C check if V/X, L/C or D/M
-        //
         return number;
     }
     
+    //finds the value of a roman numeral
     public static int numeral(char c){
         int num = 0;
         switch(c){
